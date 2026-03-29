@@ -51,6 +51,8 @@ struct meson_serial_plat {
 /* AML_UART_CONTROL bits */
 #define AML_UART_TX_EN			BIT(12)
 #define AML_UART_RX_EN			BIT(13)
+#define AML_UART_TWO_WIRE_EN		BIT(15)
+#define AML_UART_PARITY_EN		BIT(19)
 #define AML_UART_TX_RST			BIT(22)
 #define AML_UART_RX_RST			BIT(23)
 #define AML_UART_CLR_ERR		BIT(24)
@@ -94,7 +96,8 @@ static void meson_serial_init(struct meson_uart *uart)
 	writel(val, &uart->control);
 	val &= ~(AML_UART_RX_RST | AML_UART_TX_RST | AML_UART_CLR_ERR);
 	writel(val, &uart->control);
-	val |= (AML_UART_RX_EN | AML_UART_TX_EN);
+	val |= (AML_UART_RX_EN | AML_UART_TX_EN | AML_UART_TWO_WIRE_EN);
+	val &= ~(AML_UART_PARITY_EN);
 	writel(val, &uart->control);
 }
 
