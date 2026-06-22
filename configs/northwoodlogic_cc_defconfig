@@ -26,7 +26,7 @@ CONFIG_SUPPORT_RAW_INITRD=y
 # CONFIG_DISTRO_DEFAULTS is not set
 CONFIG_OF_BOARD_SETUP=y
 CONFIG_USE_BOOTCOMMAND=y
-CONFIG_BOOTCOMMAND="setenv autoload no; dhcp; tftp $loadaddr nl-industrial.itb; bootm $loadaddr#$applicationid; bootm $loadaddr; reset;"
+CONFIG_BOOTCOMMAND="load mmc 0:2 $loadaddr nl-industrial.itb; if test $? -ne 0 ; then setenv autoload no; dhcp; tftp $loadaddr nl-industrial.itb; fi; bootm $loadaddr#$applicationid; bootm $loadaddr; reset;"
 # CONFIG_DISPLAY_CPUINFO is not set
 CONFIG_MISC_INIT_R=y
 CONFIG_HUSH_PARSER=y
